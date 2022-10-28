@@ -1,5 +1,6 @@
 import tweepy
 import pandas as pd
+import xlsxwriter
 
 api_key = 'SupIZAKQIAOfoZ87Uz9v86Klo'
 api_key_secret = 'uPeW9wrShHURXQvVSu7QvEcnAnsbG8pfm6KeHiutn25cAnEn3V'
@@ -14,13 +15,11 @@ api = tweepy.API(authenticator, wait_on_rate_limit=True)
 
 tweets = tweepy.Cursor(api.search_tweets, q="first community bank")
 
+df = []
 for tweet in tweets.items():
     data = {'tweets':[tweet.text],
             'users':[tweet.user.name]} 
-    df = pd.DataFrame(data, columns = ['tweets','users'])
+    df.append(pd.DataFrame(data, columns = ['tweets','users']))
+df = pd.concat(df)
+df.to_excel('sample13_data.xlsx', sheet_name='sheet1', index=True)
 
-    df.to_csv('sample12_data.csv', index=False)
-
-    df = pd.read_csv('sample12_data.csv')
-
-    df.to_excel('sample12_data.xlsx', sheet_name='sheet1', index=True)
