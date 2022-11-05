@@ -1,15 +1,51 @@
-<form action = "search" enctype="multipart/form-data" method="">
+{% load static %}
 
-    <div class="mt-10 mx-5 p-5">
-        <h1 class="mx-5 mt-3"> Create a Twitter Query</h1>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Meta Data -->
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>Xerrox protocal</title>
+        <meta content="" name="description">
 
-        <div class="mb-3 mx-5">
-            <label for="dexcription" class="form-label ">Enter keyword(s)</label>
-            <input type="text" name="query" class="form-control form-control-lg" id="query" placeholder="query">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+        <!-- Style sheets -->
+        <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/css/variables.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+        <!-- Scripts-->
+        <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script> 
+        <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>
+    </head>
+    </html>
+    <body>
+        <div class="container">
+            <div class="section-title align-items-baseline">
+                <form action = "search" enctype="multipart/form-data" method="">
+                    <div class="mt-10 mx-5 p-5">
+                        <h1 class="mx-5 mt-3"> Create a Twitter Query</h1>
+                        <div class="mb-3 mx-5">
+                            <label for="dexcription" class="form-label ">Enter keyword(s)</label>
+                            <input type="text" name="query" class="form-control form-control-lg" id="query" placeholder="query">
+                        </div>              
+                        <div class="mb-3 mx-5">
+                            <button type="submit" class="btn btn-primary" onclick="showDiv()"> Submit</button>
+                        </div>
+                        <div id="myProgress" style="display:none;">
+                            <div id="myBar"></div>
+                        </div>
+                       
+                    </div>
+                </form>        
+            </div>   
         </div>
-
-        <div class="mb-3 mx-5">
-            <button type="submit" class="btn-primary"> Submit</button>
-        </div>
-    </div>
-</form>
+    </body>
+</html>
+</html>

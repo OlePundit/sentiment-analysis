@@ -50,6 +50,10 @@ INSTALLED_APPS = [
     'rest_framework.authtoken'
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "HTTP://LOCALHOST:8080",
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
