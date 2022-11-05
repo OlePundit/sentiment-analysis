@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from .models import Query, Results
 from io import BytesIO
-from sqlalchemy import create_engine
 from django.http import HttpResponse
 
 
