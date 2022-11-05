@@ -31,6 +31,7 @@ html-parser==0.2
 idna==3.3
 itypes==1.2.0
 Jinja2==3.1.2
+jsonfield==3.1.0
 lxml==4.9.1
 MarkupSafe==2.1.1
 numpy==1.23.4
