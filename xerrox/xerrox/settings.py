@@ -44,10 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sent',
-    'rest_framework',
-    'djoser',
-    'corsheaders',
-    'rest_framework.authtoken'
 ]
 
 CORS_ALLOWED_ORIGINS = [
