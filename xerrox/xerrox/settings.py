@@ -31,7 +31,7 @@ ACCESS_TOKEN_SECRET = '9cMoUJUMyoIxh4cLozkWLGtfEjcDm6mc70WxbUPvU17c9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['67.205.168.227', 'm.x-planetory.com']
 
 
 # Application definition
