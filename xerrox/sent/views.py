@@ -3,11 +3,13 @@ from django.conf import settings
 from .models import Query, Results
 from io import BytesIO
 from django.http import HttpResponse
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 
 # Create your views here.
 import tweepy
 import pandas as pd
+import xlsxwriter
 
 
 authenticator = tweepy.OAuthHandler(settings.API_KEY, settings.API_KEY_SECRET)
@@ -24,18 +26,58 @@ def index(request):
     
     return render(request, 'index.html',)
 
+
+def sentiment_scores(sentence):
+ 
+    # Create a SentimentIntensityAnalyzer object.
+    sid_obj = SentimentIntensityAnalyzer()
+ 
+    # polarity_scores method of SentimentIntensityAnalyzer
+    # object gives a sentiment dictionary.
+    # which contains pos, neg, neu, and compound scores.
+    sentiment_dict = sid_obj.polarity_scores(sentence)
+     
+   
+    print("Sentence Overall Rated As", end = " ")
+ 
+    # decide sentiment as positive, negative and neutral
+    if sentiment_dict['compound'] >= 0.05 :
+        print("Positive")
+ 
+    elif sentiment_dict['compound'] <= - 0.05 :
+        print("Negative")
+ 
+    else :
+        print("Neutral")    
+
 def search(request):
+    analyzer = SentimentIntensityAnalyzer()
     query = request.GET['query']
     tweets = tweepy.Cursor(api.search_tweets, q=query)
     df = []
     for tweet in tweets.items():
         id = tweet.id
         strid = str(id)
+        sentence = tweet.text 
+        sentimentality = (analyzer.polarity_scores(sentence)["compound"])
+        
+        
+        if sentimentality >= 0.05:
+            sentimentality = 'Positive'
+        elif sentimentality <= -0.05:
+            sentimentality  = 'Negative'
+        else :
+            sentimentality = 'Neutral'
+
         data = {'tweets':[tweet.text],
-                'users':[tweet.user.name],
-                'urls' : ['https://twitter.com/twitter/statuses/' + strid]} 
-        df.append(pd.DataFrame(data, columns = ['tweets','users','urls']))
+                'users':[tweet.user.name],                
+                'urls' : ['https://twitter.com/twitter/statuses/' + strid],
+                'sentiment': [sentimentality]}
+             
+        df.append(pd.DataFrame(data, columns = ['tweets','users','urls','sentiment']))
     df = pd.concat(df)
+
+    
     #engine=create_engine('sqlite:///db.sqlite3')
     #df.to_sql(Query._meta.db_table, if_exists='replace', con=engine, index=False)
     with BytesIO() as b:
@@ -51,7 +93,10 @@ def search(request):
         )
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
         return response
+
+
     
+
 
 
 

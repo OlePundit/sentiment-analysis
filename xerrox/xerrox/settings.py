@@ -28,6 +28,7 @@ API_KEY_SECRET = 'uPeW9wrShHURXQvVSu7QvEcnAnsbG8pfm6KeHiutn25cAnEn3V'
 ACCESS_TOKEN = '1578435467036561408-E7g83HbrpuIqZjPtUl2M5rsSNp6RWT'
 ACCESS_TOKEN_SECRET = '9cMoUJUMyoIxh4cLozkWLGtfEjcDm6mc70WxbUPvU17c9'
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -46,14 +47,10 @@ INSTALLED_APPS = [
     'sent',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "HTTP://LOCALHOST:8080",
-]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -85,23 +82,25 @@ WSGI_APPLICATION = 'xerrox.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
-
-DATABASES= {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME' : 'brandsent',
-        'USER' : 'glenn',
-        'PASSWORD' : 'Glennisgood14$',
-        'HOST' : 'localhost',
-        'PORT' : '',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'brandsent',
+            'USER': 'glenn',
+            'PASSWORD':'Glennisgood14$',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
+
 
 
 # Password validation
