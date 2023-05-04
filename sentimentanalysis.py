@@ -2,10 +2,10 @@ import tweepy
 import pandas as pd
 import xlsxwriter
 
-api_key = 'SupIZAKQIAOfoZ87Uz9v86Klo'
-api_key_secret = 'uPeW9wrShHURXQvVSu7QvEcnAnsbG8pfm6KeHiutn25cAnEn3V'
-access_token = '1578435467036561408-E7g83HbrpuIqZjPtUl2M5rsSNp6RWT'
-access_token_secret = '9cMoUJUMyoIxh4cLozkWLGtfEjcDm6mc70WxbUPvU17c9'
+api_key = '************'
+api_key_secret = '*************************'
+access_token = '**********************************'
+access_token_secret = '***************************'
 
 
 authenticator = tweepy.OAuthHandler(api_key, api_key_secret)
